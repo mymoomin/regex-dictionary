@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import words from "../components/words"
+import words from "../components/full-words"
 
 
 export default function Home() {
@@ -8,16 +8,20 @@ export default function Home() {
   function updateRegex(e) {
     let reg;
     try {
-      reg = new RegExp(e.target.value)
+      reg = new RegExp(e.target.value.toLowerCase())
     } catch {
       reg = regex
     }
     setRegex(reg)
     console.log(regex)
   }
-  
-  function matchRegex(inp) {
-    return regex.test(inp)
+
+  const matches = []
+  for (const word of words) {
+    if (regex.test(word)) {
+      matches.push(<li key={matches.length}>{word}</li>)
+    }
+    if (matches.length > 499) break
   }
 
   return (<div>
@@ -27,7 +31,7 @@ export default function Home() {
 
     <h2>Words</h2>
     <ol>
-      {words.map((value, index) => <li key={index} style={{display: matchRegex(value) || "none"}}>{value}</li>)}
+      {matches}
     </ol>
   </div>)
 }
