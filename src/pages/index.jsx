@@ -3,7 +3,7 @@ import words from "../components/words"
 
 
 export default function Home() {
-  const [regex, setRegex] = useState(new RegExp("s"))
+  const [regex, setRegex] = useState(new RegExp(""))
 
   function updateRegex(e) {
     let reg;
